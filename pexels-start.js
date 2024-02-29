@@ -1,10 +1,13 @@
 const MY_URL = "https://api.pexels.com/v1/search?query=";
 const MY_KEY = "cyhmXTFnFreB2vEhMOss9ffcFbptfWUypxvqnGXurjolxqwV1WCEQfSg";
 
+const removed = (e) => {
+  const deletedCol = e.closest(".col-md-4");
+  deletedCol.removed();
+};
+
 const createCard = function (photos) {
-  let album = document.querySelector(".album");
-  let container = document.querySelector(".container");
-  let row = document.querySelector(".row");
+  const row = document.querySelector(".album .container .row");
 
   row.innerHTML = "";
 
@@ -19,8 +22,9 @@ const createCard = function (photos) {
     a.href = `./pexels-details.html?photoId=${photo.id}`;
 
     const img = document.createElement("img");
-    img.src = photo.src.small;
-    img.style.width = "100%";
+    img.src = photo.src.medium;
+
+    img.style = "height: 40vh; width:100%";
 
     a.appendChild(img);
     cardDiv.appendChild(a);
@@ -28,12 +32,9 @@ const createCard = function (photos) {
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body");
 
-    const h5_a = document.createElement("a");
-    h5_a.href = `./pexels-details.html?photoId=${photo.id}`;
     const h5 = document.createElement("h5");
     h5.classList.add("card-title");
-    h5.textContent = "Photo By";
-    h5_a.appendChild(h5);
+    h5.textContent = photo.alt;
 
     const p = document.createElement("p");
     p.classList.add("card-text");
@@ -62,15 +63,13 @@ const createCard = function (photos) {
     btnGroup.appendChild(btnView);
     btnGroup.appendChild(btnHide);
     btnDiv.appendChild(btnGroup);
-    cardBody.appendChild(h5_a);
+    btnDiv.appendChild(small);
+    cardBody.appendChild(h5);
     cardBody.appendChild(p);
     cardBody.appendChild(btnDiv);
-    cardBody.appendChild(small);
     cardDiv.appendChild(cardBody);
     colDiv.appendChild(cardDiv);
     row.appendChild(colDiv);
-    container.appendChild(row);
-    album.appendChild(container);
   });
 };
 
@@ -97,13 +96,19 @@ const imgCreate = function (query) {
 };
 
 window.onload = function () {
-  let primaryButton = document.querySelector(".btn-primary");
+  const primaryButton = document.querySelector(".btn-primary");
   primaryButton.addEventListener("click", () => {
-    imgCreate("nature");
+    imgCreate("sea");
   });
 
-  let secondaryButton = document.querySelector(".btn-secondary");
+  const secondaryButton = document.querySelector(".btn-secondary");
   secondaryButton.addEventListener("click", () => {
-    imgCreate("dog");
+    imgCreate("dogs");
+  });
+
+  const search = document.querySelector(".input-group .form-control");
+  const btnSearch = document.getElementById("button-addon2");
+  btnSearch.addEventListener("click", () => {
+    imgCreate(search.value);
   });
 };
