@@ -34,11 +34,11 @@ const createCard = function (photos) {
 
     const h5 = document.createElement("h5");
     h5.classList.add("card-title");
-    h5.textContent = photo.alt;
+    h5.innerText = photo.alt;
 
     const p = document.createElement("p");
     p.classList.add("card-text");
-    p.textContent = "";
+    p.innerText = "";
 
     const btnDiv = document.createElement("div");
     btnDiv.classList.add("d-flex", "justify-content-between", "align-items-center");
@@ -49,16 +49,16 @@ const createCard = function (photos) {
     const btnView = document.createElement("button");
     btnView.type = "button";
     btnView.classList.add("btn", "btn-sm", "btn-outline-secondary");
-    btnView.textContent = "View";
+    btnView.innerText = "View";
 
     const btnHide = document.createElement("button");
     btnHide.type = "button";
     btnHide.classList.add("btn", "btn-sm", "btn-outline-secondary");
-    btnHide.textContent = "Hide";
+    btnHide.innerText = "Hide";
 
     const small = document.createElement("small");
     small.classList.add("text-muted");
-    small.textContent = photo.id;
+    small.innerText = photo.id;
 
     btnGroup.appendChild(btnView);
     btnGroup.appendChild(btnHide);
@@ -83,7 +83,7 @@ const imgCreate = function (query) {
       if (res.ok) {
         return res.json();
       } else {
-        throw new Error("Error getting the images");
+        throw new Error("Error");
       }
     })
     .then((data) => {
